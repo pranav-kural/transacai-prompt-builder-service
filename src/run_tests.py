@@ -1,0 +1,7 @@
+# run tests
+from tests.build_prompt_test import run_build_prompt_invalid_prompt_id_test, run_build_prompt_invalid_records_test, run_build_prompt_test
+
+# Build Prompt Tests
+run_build_prompt_test()
+run_build_prompt_invalid_prompt_id_test()
+run_build_prompt_invalid_records_test()

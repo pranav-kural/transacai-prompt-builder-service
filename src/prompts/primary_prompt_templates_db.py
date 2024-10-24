@@ -3,6 +3,6 @@ from abc import ABCMeta, abstractmethod
 class PrimaryPromptTemplatesDB(metaclass=ABCMeta):
     # abstract method to get prompt template by id
     @abstractmethod
-    def get_prompt_template_by_id(self, req_id: str, client_id: str, prompt_id: int) -> str:
+    def get_prompt_template_by_id(self, req_id: str, client_id: str, prompt_id: int) -> str | None:
         pass
 

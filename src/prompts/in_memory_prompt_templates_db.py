@@ -1,3 +1,4 @@
+from logger.utils import log_info, log_warning
 from prompts.primary_prompt_templates_db import PrimaryPromptTemplatesDB
 # In memory prompt templates database
 class InMemoryPromptTemplatesDB(PrimaryPromptTemplatesDB):
@@ -42,7 +43,7 @@ Transactions data (in JSON format) given below:
 ]
 
   # method to get prompt template by id
-  def get_prompt_template_by_id(self, req_id, client_id, prompt_id) -> str:
+  def get_prompt_template_by_id(self, req_id, client_id, prompt_id) -> str | None:
     """
     Method to get prompt template by id. Client ID must also be provided and match, i.e., prompt template must belong to the client.
 
@@ -54,9 +55,10 @@ Transactions data (in JSON format) given below:
     Returns:
     prompt_template (Dict): Prompt template
     """
-    print(f"Getting prompt template for request {req_id} with client {client_id} and prompt {prompt_id}")
+    log_info(f"get_prompt_template_by_id - Getting prompt template for request {req_id} with client {client_id} and prompt {prompt_id}")
     # return prompt template with given id
     for prompt in self.data:
       if prompt["id"] == prompt_id and prompt["client_id"] == client_id:
         return prompt["text"]
+    log_warning(f"get_prompt_template_by_id - Prompt template not found for request {req_id} with client {client_id} and prompt {prompt_id}")
     return None
