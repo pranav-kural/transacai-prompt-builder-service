@@ -1,4 +1,4 @@
-from src.prompts.primary_prompt_templates_db import PrimaryPromptTemplatesDB
+from prompts.primary_prompt_templates_db import PrimaryPromptTemplatesDB
 # In memory prompt templates database
 class InMemoryPromptTemplatesDB(PrimaryPromptTemplatesDB):
 
@@ -13,8 +13,16 @@ class InMemoryPromptTemplatesDB(PrimaryPromptTemplatesDB):
 		"language": "en-US",
 		"client_id": "test_client",
 		"text": """You are an expert in analyzing card transactions and providing useful insights. Below you will find a list of card transactions made by employees. 
-Analyze this data and generate useful and actionable insights, like overall spending trends across categories, overall spending habits across employees, possible optimizations, anomalies, etc., that will help business owners better understand employee spending and identify areas of opportunities. Keep the response concise and use bullet points and appropriate headings to organize your response. For providing overall insights, no need to be too descriptive and provide details on specific transactions.
+Analyze this data and generate useful and actionable insights, like overall spending trends across categories, overall spending habits across employees, possible optimizations, anomalies, etc., that will help business owners better understand employee spending and identify areas of opportunities. Keep the response concise and use bullet points and appropriate headings to organize your response. For providing overall insights, no need to be too descriptive and no need to provide details on specific transactions.
 Your response maybe used by another large language model, so at the end of insights, provide a brief summary optimized for analysis by a large language model.
+
+Organize your insights under below headings:
+1. Category-wise Spending Insights
+2. Employee-Specific Insights
+3. Anomalies
+4. Overall Spending Trends
+5. Optimization Suggestions
+6. Summary
 
 Flag transactions as anomalies if they violate below category-wise thresholds:
 ```
@@ -25,7 +33,7 @@ personal_care,100
 entertainment,50
 ```
 
-Transactions data (in CSV format) given below:
+Transactions data (in JSON format) given below:
 ```
 {transactions}
 ```
