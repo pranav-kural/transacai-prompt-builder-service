@@ -1,0 +1,40 @@
+version: 1
+disable_existing_loggers: True
+
+formatters:
+    simple:
+        format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        datefmt: '%Y-%m-%d %H:%M:%S'
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+
+    file:
+        class: logging.FileHandler
+        formatter: simple
+        filename: igs_core.log
+        mode: a
+
+loggers:
+    development:
+        handlers: [console]
+        propagate: no
+
+    staging:
+        handlers: [console, file]
+        propagate: no
+
+    production:
+        handlers: [file]
+        propagate: no
+
+    TESTING:
+        handlers: [console, file]
+        propagate: no
+
+root:
+    level: DEBUG
+    handlers: [console]
