@@ -2,12 +2,14 @@ from logging import Logger
 import logging.config
 import yaml
 import os
+from os.path import dirname, abspath
 from dotenv import load_dotenv
 
 load_dotenv() 
 
 # Load the config file
-with open('src/logger/logging_config.yaml', 'rt') as f:
+logger_config_filepath = dirname(dirname(abspath(__file__))) + "/logger/logging_config.yaml"
+with open(logger_config_filepath, 'rt') as f:
     config = yaml.safe_load(f.read())
 
 # Configure the logging module with the config file
