@@ -164,3 +164,6 @@ cython_debug/
 
 # private
 private/
+
+# VS Code
+.vscode/
