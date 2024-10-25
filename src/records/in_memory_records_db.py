@@ -1,16 +1,19 @@
 import pandas as pd
 from logger.utils import log_info, log_warning
 from records.primary_records_db import PrimaryRecordsDB
+from os.path import dirname, abspath
 
 # Class representing an in-memory database of records
 class InMemoryRecordsDB(PrimaryRecordsDB):
-
+  # filename of data file
   filename = "transac_sample_v1.csv"
+  # filepath to data file (store file in `data` folder at `src` level)
+  filepath = dirname(dirname(abspath(__file__))) + "/data/" + filename
 
   def __init__(self):
-    log_info("Initializing InMemoryRecordsDB for file: " + self.filename)
+    log_info("Initializing InMemoryRecordsDB for file: " + self.filepath)
     # load data
-    self.data = pd.read_csv(self.filename)
+    self.data = pd.read_csv(self.filepath)
 
   # method to get records given request id, client id, from_time and to_time
   def get_records(self, req_id: str, client_id: str, from_time: str, to_time: str) -> str | None:
