@@ -65,13 +65,13 @@ The service will start running on port `50051`.
 You can also run the service using Docker. You can build the Docker image using the following command:
 
 ```bash
-docker build -t prompt-builder-service .
+docker build -t transac-ai-pbs .
 ```
 
 You can then run the Docker container using the following command:
 
 ```bash
-docker run -p 50051:50051 prompt-builder-service
+docker run --env-file .env -p 50051:50051 transac-ai-pbs
 ```
 
 ## Testing Locally
@@ -79,10 +79,20 @@ docker run -p 50051:50051 prompt-builder-service
 To test the service locally, you can use [grpcurl](https://github.com/fullstorydev/grpcurl) to send requests to the service.
 
 ```bash
-grpcurl -plaintext -d '{"req_id":"1","client_id":"test_client","prompt_id":1,"records_source_id":"IN_MEMORY","prompt_templates_source_id":"SUPABASE","from_time":"2019-12-29T06:39:22","to_time":"2019-12-29T23:49:22"}' localhost:50051 prompt_builder.PromptBuilder/BuildPrompt
+grpcurl -plaintext -d '{"req_id":"1","client_id":"test_client","prompt_id":1,"records_source_id":"SUPABASE","prompt_templates_source_id":"SUPABASE","from_time":"2019-12-29T06:39:22","to_time":"2019-12-29T23:49:22"}' 35.227.31.209:80 prompt_builder.PromptBuilder/BuildPrompt
 ```
 
 ## gRPC
+
+The PBS services exposes a gRPC service. The protobuf definition of the service can be found in the `src/rpc/protos/prompt_builder.proto` file.
+
+Primary service endpoint that is supports is the `BuildPrompt` method.
+
+```protobuf
+service PromptBuilder {
+  rpc BuildPrompt (BuildPromptRequest) returns (BuildPromptResponse);
+}
+```
 
 ### Regenerating gRPC Code
 
@@ -93,3 +103,25 @@ sh ./rpc/scripts/gen_prompt_builder_protos.sh
 ```
 
 This will regenerate the gRPC code in the `src/rpc/protos` directory.
+
+## Deployment (Google Kubernetes Engine)
+
+PBS is deployed on the Google Kubernetes Engine (GKE) in the same cluster as the Insights Generation Service (IGS) to enable efficient low-latency communication between the services.
+
+Manifests for the deployment and service are located in the `kubernetes` directory.
+
+Deployment instructions and information is available in the `kubernetes/README.md` file.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Issues
+
+If you encounter any issues or bugs while using this project, please report them by following these steps:
+
+1. Check if the issue has already been reported by searching our [issue tracker](https://github.com/pranav-kural/transacai-prompt-builder-service/issues).
+2. If the issue hasn't been reported, create a new issue and provide a detailed description of the problem.
+3. Include steps to reproduce the issue and any relevant error messages or screenshots.
+
+[Open Issue](https://github.com/pranav-kural/transacai-prompt-builder-service/issues/new)

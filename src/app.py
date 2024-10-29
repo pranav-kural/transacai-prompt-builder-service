@@ -1,14 +1,16 @@
-from concurrent import futures
-
+import os
 import grpc
+from concurrent import futures
 from grpc_reflection.v1alpha import reflection
 from core.prompt_builder import build_prompt
 from logger.utils import log_error
-from prompts import prompt_templates_db
 from prompts.prompt_templates_db_types import get_prompt_templates_db_type_from_str
 from records.records_db_types import get_records_db_type_from_str
 from rpc.protos import prompt_builder_pb2
 from rpc.protos import prompt_builder_pb2_grpc
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class PromptBuilder(prompt_builder_pb2_grpc.PromptBuilderServicer):
     def BuildPrompt(self, request: prompt_builder_pb2.BuildPromptRequest, context):
@@ -73,7 +75,8 @@ def serve(server):
     server.wait_for_termination()
 
 def main():
-    server, unused_port = create_server("[::]:50051")
+    default_port = os.getenv("SERVER_PORT", "50051")
+    server, unused_port = create_server(f"[::]:{default_port}")
     serve(server)
 
 if __name__ == "__main__":
