@@ -3,6 +3,7 @@ from enum import Enum
 # Enum to define types of DB storing records data
 class RecordsDBType(Enum):
     IN_MEMORY = "in_memory"
+    SUPABASE = "supabase"
 
 # Utility method to get RecordsDBType from string
 def get_records_db_type_from_str(db_type: str) -> RecordsDBType:

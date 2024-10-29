@@ -1,6 +1,7 @@
 from logger.utils import log_info, log_warning
 from prompts.primary_prompt_templates_db import PrimaryPromptTemplatesDB
-from prompts.supabase.client import get_supabase_client
+from vendors.supabase.client import get_supabase_client
+
 # Supabase prompt templates store
 class SupabasePromptTemplatesDB(PrimaryPromptTemplatesDB):
     # Initialize client

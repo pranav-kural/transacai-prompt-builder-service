@@ -2,9 +2,9 @@ import unittest
 from unittest.mock import patch, MagicMock
 
 from supabase import Client
-from prompts.supabase.supabase_prompt_templates_db import SupabasePromptTemplatesDB
+from prompts.supabase_prompt_templates_db import SupabasePromptTemplatesDB
 
-test_client_prompt_1_text = "test_prompt"
+test_client_prompt_1_text = "test_prompt: {transactions}"
 
 class TestSupabasePromptTemplatesDB(unittest.TestCase):
 

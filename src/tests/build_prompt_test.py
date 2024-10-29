@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from core.prompt_builder import build_prompt
+from prompts.prompt_templates_db_types import PromptTemplatesDBType
 from records.records_db_types import RecordsDBType
 
 class TestBuildPrompt(unittest.TestCase):
@@ -16,6 +17,7 @@ class TestBuildPrompt(unittest.TestCase):
                 client_id="test_client", 
                 prompt_id=1, 
                 records_source_id=RecordsDBType.IN_MEMORY,
+                prompt_templates_source_id=PromptTemplatesDBType.IN_MEMORY,
                 from_time="2019-12-29T06:39:22", 
                 to_time="2019-12-29T23:59:22"
             )
@@ -38,6 +40,7 @@ class TestBuildPrompt(unittest.TestCase):
                 client_id="test_client", 
                 prompt_id=100, 
                 records_source_id=RecordsDBType.IN_MEMORY,
+                prompt_templates_source_id=PromptTemplatesDBType.IN_MEMORY,
                 from_time="2019-12-29T06:39:22", 
                 to_time="2019-12-29T23:49:22"
             )
@@ -57,6 +60,7 @@ class TestBuildPrompt(unittest.TestCase):
                 client_id="test_client", 
                 prompt_id=1, 
                 records_source_id=RecordsDBType.IN_MEMORY,
+                prompt_templates_source_id=PromptTemplatesDBType.IN_MEMORY,
                 from_time="2019-12-29T06:49:22", 
                 to_time="2019-12-29T06:49:22"
             )
