@@ -10,9 +10,10 @@ message BuildPromptRequest {
     string req_id = 1;
     string client_id = 2;
     int32 prompt_id = 3;
-    string source_id = 4;
-    string from_time = 5;
-    string to_time = 6;
+    string records_source_id = 4;
+    string prompt_templates_source_id = 5;
+    string from_time = 6;
+    string to_time = 7;
 }
 
 // Response for BuildPrompt
