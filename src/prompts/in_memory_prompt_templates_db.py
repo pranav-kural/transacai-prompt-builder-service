@@ -13,7 +13,7 @@ class InMemoryPromptTemplatesDB(PrimaryPromptTemplatesDB):
 		"version": "1.0",
 		"language": "en-US",
 		"client_id": "test_client",
-		"text": """You are an expert in analyzing card transactions and providing useful insights. Below you will find a list of card transactions made by employees. 
+		"prompt_text": """You are an expert in analyzing card transactions and providing useful insights. Below you will find a list of card transactions made by employees. 
 Analyze this data and generate useful and actionable insights, like overall spending trends across categories, overall spending habits across employees, possible optimizations, anomalies, etc., that will help business owners better understand employee spending and identify areas of opportunities. Keep the response concise and use bullet points and appropriate headings to organize your response. For providing overall insights, no need to be too descriptive and no need to provide details on specific transactions.
 Your response maybe used by another large language model, so at the end of insights, provide a brief summary optimized for analysis by a large language model.
 
@@ -59,6 +59,6 @@ Transactions data (in JSON format) given below:
     # return prompt template with given id
     for prompt in self.data:
       if prompt["id"] == prompt_id and prompt["client_id"] == client_id:
-        return prompt["text"]
+        return prompt["prompt_text"]
     log_warning(f"get_prompt_template_by_id - Prompt template not found for request {req_id} with client {client_id} and prompt {prompt_id}")
     return None
