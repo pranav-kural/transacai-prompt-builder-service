@@ -1,0 +1,12 @@
+# Load balancer to access the transac-ai-iss deployment
+apiVersion: v1
+kind: Service
+metadata:
+    name: transac-ai-pbs-service
+spec:
+    type: LoadBalancer
+    selector:
+        app: transac-ai-pbs
+    ports:
+        - port: 80
+          targetPort: 50051

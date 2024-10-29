@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: transac-ai-pbs-gke
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: transac-ai-pbs
+    template:
+        metadata:
+            labels:
+                app: transac-ai-pbs
+        spec:
+            containers:
+                - name: pbs-app
+                  image: us-east1-docker.pkg.dev/transac-ai/pbs-repo/transac-ai-pbs-gke:latest
+                  ports:
+                      # gRPC server port
+                      - containerPort: 50051
+                  env:
+                      # LOG_MODE is used to control logger type (prod, staging, dev, etc.)
+                      - name: LOG_MODE
+                        valueFrom:
+                            secretKeyRef:
+                                name: transac-ai-pbs-secrets
+                                key: transac-ai-pbs-log-mode
+                      # Supabase records DB
+                      - name: SUPABASE_URL
+                        valueFrom:
+                            secretKeyRef:
+                                name: transac-ai-pbs-secrets
+                                key: transac-ai-pbs-supabase-url
+                      - name: SUPABASE_KEY
+                        valueFrom:
+                            secretKeyRef:
+                                name: transac-ai-pbs-secrets
+                                key: transac-ai-pbs-supabase-key
+                      # gRPC server port. Defaults to 50051 if not set.
+                      - name: SERVER_PORT
+                        valueFrom:
+                            secretKeyRef:
+                                name: transac-ai-pbs-secrets
+                                key: transac-ai-pbs-server-port
+                  resources:
+                      requests:
+                          memory: '256Mi'
+                          cpu: '50m'
+                          ephemeral-storage: '256Mi'
+                      limits:
+                          memory: '512Mi'
+                          cpu: '100m'
+                          ephemeral-storage: '512Mi'
