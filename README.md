@@ -15,7 +15,8 @@ The PBS is a gRPC service that takes in a request with the following information
 -   **`req_id`**: A unique identifier for a request for idempotency, traceability, and debugging.
 -   **`client_id`**: A unique identifier for a client.
 -   **`prompt_id`**: ID of the prompt template to be used for generating insights. This allows the client to use different templates for different types of insights and data.
--   **`source_id`**: ID of the source of the transactional data.
+-   **`records_source_id`**: ID of the source of the transactional data records. This allows the client to use different sources of transactional data for generating insights, and also helps improve resiliency by allowing the client to use different sources in case one source is down.
+-   **`prompt_templates_source_id`**: ID of the source of the prompt templates. This allows the client to use different sources of prompt templates for generating insights, and also helps improve resiliency by allowing the client to use different sources in case one source is down.
 -   **`from_time`**: Start time of the transactional data to be used for generating insights.
 -   **`to_time`**: End time of the transactional data to be used for generating insights.
 
@@ -78,5 +79,17 @@ docker run -p 50051:50051 prompt-builder-service
 To test the service locally, you can use [grpcurl](https://github.com/fullstorydev/grpcurl) to send requests to the service.
 
 ```bash
-grpcurl -plaintext -d '{"req_id":"1","client_id":"test_client","prompt_id":1,"source_id":"IN_MEMORY","from_time":"2019-12-29T06:39:22","to_time":"2019-12-29T23:49:22"}' localhost:50051 prompt_builder.PromptBuilder/BuildPrompt
+grpcurl -plaintext -d '{"req_id":"1","client_id":"test_client","prompt_id":1,"records_source_id":"IN_MEMORY","prompt_templates_source_id":"SUPABASE","from_time":"2019-12-29T06:39:22","to_time":"2019-12-29T23:49:22"}' localhost:50051 prompt_builder.PromptBuilder/BuildPrompt
 ```
+
+## gRPC
+
+### Regenerating gRPC Code
+
+From `src` directory, run the following command to regenerate the gRPC code:
+
+```bash
+sh ./rpc/scripts/gen_prompt_builder_protos.sh
+```
+
+This will regenerate the gRPC code in the `src/rpc/protos` directory.

@@ -1,7 +1,17 @@
-# run tests
-from tests.build_prompt_test import run_build_prompt_invalid_prompt_id_test, run_build_prompt_invalid_records_test, run_build_prompt_test
+import unittest
+import configparser
 
-# Build Prompt Tests
-run_build_prompt_test()
-run_build_prompt_invalid_prompt_id_test()
-run_build_prompt_invalid_records_test()
+# Read configuration
+config = configparser.ConfigParser()
+config.read('unittest.cfg')
+
+# Get configuration values
+start_directory = config['unittest']['start-directory']
+pattern = config['unittest']['pattern']
+
+# Discover and run tests
+loader = unittest.TestLoader()
+suite = loader.discover(start_directory, pattern=pattern)
+
+runner = unittest.TextTestRunner()
+runner.run(suite)

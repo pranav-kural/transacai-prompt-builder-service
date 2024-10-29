@@ -2,6 +2,7 @@ from logger.utils import log_error, log_info
 from prompts.primary_prompt_templates_db import PrimaryPromptTemplatesDB
 from prompts.prompt_templates_db_types import PromptTemplatesDBType
 from prompts.in_memory_prompt_templates_db import InMemoryPromptTemplatesDB
+from prompts.supabase.supabase_prompt_templates_db import SupabasePromptTemplatesDB
 
 # Global variable to store primary instance of DB storing prompt templates data
 db: PrimaryPromptTemplatesDB | None = None
@@ -15,6 +16,9 @@ def get_primary_prompt_templates_db(db_type: PromptTemplatesDBType) -> PrimaryPr
         if db_type == PromptTemplatesDBType.IN_MEMORY:
             log_info("get_primary_prompt_templates_db - Creating InMemoryPromptTemplatesDB")
             db = InMemoryPromptTemplatesDB()
+        elif db_type == PromptTemplatesDBType.SUPABASE:
+            log_info("get_primary_prompt_templates_db - Creating SupabasePromptTemplatesDB")
+            db = SupabasePromptTemplatesDB()
         else:
             log_error("get_primary_prompt_templates_db - Invalid DB type")
             raise Exception("Invalid DB type")

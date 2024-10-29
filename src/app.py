@@ -4,7 +4,9 @@ import grpc
 from grpc_reflection.v1alpha import reflection
 from core.prompt_builder import build_prompt
 from logger.utils import log_error
-from records.records_db_types import RecordsDBType, get_records_db_type_from_str
+from prompts import prompt_templates_db
+from prompts.prompt_templates_db_types import get_prompt_templates_db_type_from_str
+from records.records_db_types import get_records_db_type_from_str
 from rpc.protos import prompt_builder_pb2
 from rpc.protos import prompt_builder_pb2_grpc
 
@@ -13,9 +15,18 @@ class PromptBuilder(prompt_builder_pb2_grpc.PromptBuilderServicer):
 
         # Identify source
         try:
-            source_id = get_records_db_type_from_str(request.source_id)
+            records_source_id = get_records_db_type_from_str(request.records_source_id)
         except ValueError as e:
-            log_error(f"PromptBuilder - BuildPrompt - Invalid source_id: {request.source_id}")
+            log_error(f"PromptBuilder - BuildPrompt - Invalid source_id: {request.records_source_id}")
+            context.set_details(str(e))
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            return prompt_builder_pb2.BuildPromptResponse()
+        
+        # Identify prompt template source
+        try:
+            prompt_templates_source_id = get_prompt_templates_db_type_from_str(request.prompt_templates_source_id)
+        except ValueError as e:
+            log_error(f"PromptBuilder - BuildPrompt - Invalid prompt_templates_source_id: {request.prompt_templates_source_id}")
             context.set_details(str(e))
             context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
             return prompt_builder_pb2.BuildPromptResponse()
@@ -26,7 +37,8 @@ class PromptBuilder(prompt_builder_pb2_grpc.PromptBuilderServicer):
               req_id=request.req_id,
               client_id=request.client_id,
               prompt_id=request.prompt_id,
-              source_id=source_id,
+              records_source_id=records_source_id,
+              prompt_templates_source_id=prompt_templates_source_id,
               from_time=request.from_time,
               to_time=request.to_time,
           )

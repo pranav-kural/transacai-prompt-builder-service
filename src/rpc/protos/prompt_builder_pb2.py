@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1frpc/protos/prompt_builder.proto\x12\x0eprompt_builder\"\x81\x01\n\x12\x42uildPromptRequest\x12\x0e\n\x06req_id\x18\x01 \x01(\t\x12\x11\n\tclient_id\x18\x02 \x01(\t\x12\x11\n\tprompt_id\x18\x03 \x01(\x05\x12\x11\n\tsource_id\x18\x04 \x01(\t\x12\x11\n\tfrom_time\x18\x05 \x01(\t\x12\x0f\n\x07to_time\x18\x06 \x01(\t\"%\n\x13\x42uildPromptResponse\x12\x0e\n\x06prompt\x18\x01 \x01(\t2g\n\rPromptBuilder\x12V\n\x0b\x42uildPrompt\x12\".prompt_builder.BuildPromptRequest\x1a#.prompt_builder.BuildPromptResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1frpc/protos/prompt_builder.proto\x12\x0eprompt_builder\"\xad\x01\n\x12\x42uildPromptRequest\x12\x0e\n\x06req_id\x18\x01 \x01(\t\x12\x11\n\tclient_id\x18\x02 \x01(\t\x12\x11\n\tprompt_id\x18\x03 \x01(\x05\x12\x19\n\x11records_source_id\x18\x04 \x01(\t\x12\"\n\x1aprompt_templates_source_id\x18\x05 \x01(\t\x12\x11\n\tfrom_time\x18\x06 \x01(\t\x12\x0f\n\x07to_time\x18\x07 \x01(\t\"%\n\x13\x42uildPromptResponse\x12\x0e\n\x06prompt\x18\x01 \x01(\t2g\n\rPromptBuilder\x12V\n\x0b\x42uildPrompt\x12\".prompt_builder.BuildPromptRequest\x1a#.prompt_builder.BuildPromptResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,9 +32,9 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'rpc.protos.prompt_builder_p
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_BUILDPROMPTREQUEST']._serialized_start=52
-  _globals['_BUILDPROMPTREQUEST']._serialized_end=181
-  _globals['_BUILDPROMPTRESPONSE']._serialized_start=183
-  _globals['_BUILDPROMPTRESPONSE']._serialized_end=220
-  _globals['_PROMPTBUILDER']._serialized_start=222
-  _globals['_PROMPTBUILDER']._serialized_end=325
+  _globals['_BUILDPROMPTREQUEST']._serialized_end=225
+  _globals['_BUILDPROMPTRESPONSE']._serialized_start=227
+  _globals['_BUILDPROMPTRESPONSE']._serialized_end=264
+  _globals['_PROMPTBUILDER']._serialized_start=266
+  _globals['_PROMPTBUILDER']._serialized_end=369
 # @@protoc_insertion_point(module_scope)
