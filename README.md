@@ -120,8 +120,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 If you encounter any issues or bugs while using this project, please report them by following these steps:
 
-1. Check if the issue has already been reported by searching our [issue tracker](https://github.com/pranav-kural/transacai-prompt-builder-service/issues).
+1. Check if the issue has already been reported by searching our [issue tracker](https://github.com/transac-ai/transacai-prompt-builder-service/issues).
 2. If the issue hasn't been reported, create a new issue and provide a detailed description of the problem.
 3. Include steps to reproduce the issue and any relevant error messages or screenshots.
 
-[Open Issue](https://github.com/pranav-kural/transacai-prompt-builder-service/issues/new)
+[Open Issue](https://github.com/transac-ai/transacai-prompt-builder-service/issues/new)
