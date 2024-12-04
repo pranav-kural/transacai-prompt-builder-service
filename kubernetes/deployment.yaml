@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: transac-ai-pbs-gke
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: transac-ai-pbs
@@ -44,10 +44,10 @@ spec:
               key: transac-ai-pbs-server-port
         resources:
           requests:
-            memory: '180Mi'
+            memory: '80Mi'
             cpu: '50m'
             ephemeral-storage: '10Mi'
           limits:
-            memory: '256Mi'
-            cpu: '100m'
-            ephemeral-storage: '52Mi'
+            memory: '80Mi'
+            cpu: '50m'
+            ephemeral-storage: '10Mi'
